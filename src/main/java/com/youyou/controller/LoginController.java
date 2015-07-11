@@ -29,7 +29,10 @@ public class LoginController {
 	@RequestMapping("login")
 	public ModelAndView signIn(@RequestParam("id") Integer userId,
 			@RequestParam("pwd") String password,HttpServletResponse response) throws IOException {
-		User u = userService.getUserById(userId);
+		User u = null;
+		if(userId != null && password != null){
+			u = userService.getUserById(userId);
+		}
 		if (u != null && u.getPassword().equals(password)) {
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("main");
@@ -37,8 +40,8 @@ public class LoginController {
 			return mv;
 		} else {
 			//response.sendRedirect(httpServletRequest.getServletContext().getContextPath()+"/index.jsp");
-			ModelAndView mv = new ModelAndView(new RedirectView(httpServletRequest.getServletContext().getContextPath()+"/index.jsp"));
-			httpServletRequest.setAttribute("flag", false);
+			ModelAndView mv = new ModelAndView(new RedirectView(httpServletRequest.getServletContext().getContextPath()+"/index.jsp?flag=false"));
+			//httpServletRequest.getSession().setAttribute("flag", false);
 			return mv;
 		}
 

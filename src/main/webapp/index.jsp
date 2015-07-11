@@ -5,6 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>index</title>
+<script type="text/javascript">
+window.onload=function(){
+		if(!<%= request.getParameter("flag")%>){
+			document.getElementById('msg').innerHTML="<font color='#FF0000'>账号密码不正确</font>";
+		}
+}
+</script>
 </head>
 <body>
 
@@ -14,13 +21,5 @@ id:&nbsp&nbsp<input type="text" name="id"/><br/>
 <input type="submit" value="提交" />
 <span id="msg"></span>
 </form>
-
-<script type="text/javascript">
-Window.onload=function(){
-		if(${flag == false}){
-			document.getElementById('msg').innerHTML="error";
-		}
-}
-</script>
 </body>
 </html>
